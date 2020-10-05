@@ -51,15 +51,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 fatalError("Model failed to process image.")
             }
             
+            if let firstResult = results.first {
+                if firstResult.identifier.contains("hotdog") {
+                    self.navigationItem.title = "Hotdog!"
+                } else {
+                    self.navigationItem.title = "Not Hotdog!"
+                }
+            }
+            
             print(results)
         }
         
-        let handler = VNImageRequestHandler(ciImage :image)
+        let handler = VNImageRequestHandler(ciImage: image)
         
         do {
             try handler.perform([request])
-        }
-        catch {
+        } catch {
             print(error)
         }
     }
